@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Rescue Mission</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Robot Selection Screen -->
+        <div id="selection-screen" class="game-screen">
+            <h1>Robot Rescue Mission</h1>
+            <h2>Choose your Robot, Micah!</h2>
+            
+            <div class="robot-selection">
+                <div class="robot-card" data-robot="red" onclick="selectRobot('red')">
+                    <div class="robot-color robot-red">
+                        <div class="robot-figure">
+                            <div class="robot-eyes">
+                                <div class="robot-eye"></div>
+                                <div class="robot-eye"></div>
+                            </div>
+                            <div class="robot-mouth"></div>
+                            <div class="robot-body"></div>
+                        </div>
+                    </div>
+                    <div class="robot-name">Blaze</div>
+                    <div class="robot-power">Power: Flight</div>
+                    <div class="robot-power-desc">Can fly over one obstacle</div>
+                </div>
+                
+                <div class="robot-card" data-robot="blue" onclick="selectRobot('blue')">
+                    <div class="robot-color robot-blue">
+                        <div class="robot-figure">
+                            <div class="robot-eyes">
+                                <div class="robot-eye"></div>
+                                <div class="robot-eye"></div>
+                            </div>
+                            <div class="robot-mouth"></div>
+                            <div class="robot-body"></div>
+                        </div>
+                    </div>
+                    <div class="robot-name">Sonar</div>
+                    <div class="robot-power">Power: Scan</div>
+                    <div class="robot-power-desc">Can detect a hidden item</div>
+                </div>
+                
+                <div class="robot-card" data-robot="yellow" onclick="selectRobot('yellow')">
+                    <div class="robot-color robot-yellow">
+                        <div class="robot-figure">
+                            <div class="robot-eyes">
+                                <div class="robot-eye"></div>
+                                <div class="robot-eye"></div>
+                            </div>
+                            <div class="robot-mouth"></div>
+                            <div class="robot-body"></div>
+                        </div>
+                    </div>
+                    <div class="robot-name">Bumble</div>
+                    <div class="robot-power">Power: Shrink</div>
+                    <div class="robot-power-desc">Can shrink to reach tight spaces</div>
+                </div>
+                
+                <div class="robot-card" data-robot="green" onclick="selectRobot('green')">
+                    <div class="robot-color robot-green">
+                        <div class="robot-figure">
+                            <div class="robot-eyes">
+                                <div class="robot-eye"></div>
+                                <div class="robot-eye"></div>
+                            </div>
+                            <div class="robot-mouth"></div>
+                            <div class="robot-body"></div>
+                        </div>
+                    </div>
+                    <div class="robot-name">Crusher</div>
+                    <div class="robot-power">Power: Strength</div>
+                    <div class="robot-power-desc">Can move one heavy obstacle</div>
+                </div>
+            </div>
+            
+            <button id="start-button" class="start-button" disabled onclick="startGame()">
+                Start Rescue Mission!
+            </button>
+        </div>
+        
+        <!-- Gameplay Screen -->
+        <div id="gameplay-screen" class="game-screen">
+            <div class="game-header">
+                <div class="info-box robot-info">
+                    Robot: <span id="robot-name">-</span>
+                </div>
+                <div class="info-box timer-info">
+                    Time: <span id="timer">30</span>s
+                </div>
+                <div class="info-box score-info">
+                    Score: <span id="score">0</span>/5
+                </div>
+            </div>
+            
+            <div class="game-world" id="game-world">
+                <!-- Obstacles - spread out for larger game area -->
+                <div class="obstacle" style="top: 40px; left: 60px; width: 100px; height: 100px;"></div>
+                <div class="obstacle" style="bottom: 150px; right: 60px; width: 120px; height: 80px;"></div>
+                <div class="obstacle" style="top: 200px; left: 220px; width: 80px; height: 80px;"></div>
+                <div class="obstacle" style="top: 320px; right: 220px; width: 90px; height: 70px;"></div>
+                <div class="obstacle" style="top: 180px; right: 400px; width: 70px; height: 140px;"></div>
+                
+                <!-- Items to be rescued - will be positioned by JavaScript -->
+                <div class="rescue-item" id="item-1" onclick="findItem('item-1')">
+                    <span class="star-icon">★</span>
+                </div>
+                <div class="rescue-item" id="item-2" onclick="findItem('item-2')">
+                    <span class="star-icon">★</span>
+                </div>
+                <div class="rescue-item" id="item-3" onclick="findItem('item-3')">
+                    <span class="star-icon">★</span>
+                </div>
+                <div class="rescue-item" id="item-4" onclick="findItem('item-4')">
+                    <span class="star-icon">★</span>
+                </div>
+                <div class="rescue-item" id="item-5" onclick="findItem('item-5')">
+                    <span class="star-icon">★</span>
+                </div>
+                
+                <!-- Player Robot -->
+                <div class="player-robot" id="player-robot">
+                    <div class="robot-face"></div>
+                </div>
+            </div>
+            
+            <button id="power-button" class="power-button" onclick="usePower()">
+                Use Power!
+            </button>
+            
+            <div class="instructions">
+                Find all the items before time runs out! Click on the yellow dots to rescue them.
+            </div>
+        </div>
+        
+        <!-- Game Complete Screen -->
+        <div id="complete-screen" class="game-screen">
+            <h1>Mission Complete!</h1>
+            
+            <div class="complete-message">
+                <h2 class="complete-title">Great job, Micah!</h2>
+                <p class="complete-score">You rescued <span id="final-score">0</span> out of 5 items!</p>
+                
+                <div id="perfect-score-message" class="perfect-score" style="display: none;">
+                    Perfect Score! You're a Rescue Hero!
+                </div>
+                
+                <div id="try-again-message" class="try-again">
+                    Try again to rescue all the items!
+                </div>
+            </div>
+            
+            <button class="start-button" onclick="resetGame()">
+                Play Again
+            </button>
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="game.js"></script>
+</body>
+</html>
