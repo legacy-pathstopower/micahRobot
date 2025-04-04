@@ -1,0 +1,23 @@
+{
+  "name": "robot-rescue-game",
+  "version": "1.0.0",
+  "description": "A seek and find game made for Micah.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legacy-pathstopower/micahRobot.git"
+  },
+  "author": "MR",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/legacy-pathstopower/micahRobot/issues"
+  },
+  "homepage": "https://github.com/legacy-pathstopower/micahRobot#readme",
+  "dependencies": {
+    "@capacitor/core": "^7.2.0",
+    "@capacitor/ios": "^7.2.0"
+  }
+}
