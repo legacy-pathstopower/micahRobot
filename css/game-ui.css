@@ -1,0 +1,122 @@
+/* Game header with info boxes */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.info-box {
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.robot-info { background-color: #cce6ff; }
+.timer-info { background-color: #ffcccc; }
+.score-info { background-color: #ccffcc; }
+
+/* Mini-map */
+.mini-map-container {
+    width: 150px;
+    height: 150px;
+    border: 3px solid #999;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #e6e6e6;
+    position: relative;
+}
+
+.mini-map {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.mini-map-player {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: red;
+    z-index: 10;
+}
+
+.mini-map-item {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: gold;
+    z-index: 5;
+}
+
+.mini-map-obstacle {
+    position: absolute;
+    background-color: #999;
+    z-index: 3;
+}
+
+/* Power button */
+.power-button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.power-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Instructions */
+.instructions {
+    background-color: #ffffcc;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 1.1rem;
+}
+
+.controls-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px auto;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.controls-list li {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.controls-list strong {
+    color: #0066cc;
+}
+
+/* Collection effect */
+.collect-effect {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid #99ff99;
+    z-index: 15;
+    pointer-events: none;
+    animation: collectEffect 1s forwards;
+}

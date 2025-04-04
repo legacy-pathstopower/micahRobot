@@ -1,0 +1,37 @@
+/* Typography */
+h1 {
+    color: #0066cc;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Common button styles */
+.start-button {
+    display: block;
+    margin: 0 auto;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #00cc66;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.start-button:hover {
+    background-color: #00aa55;
+}
+
+.start-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}

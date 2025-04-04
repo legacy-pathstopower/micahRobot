@@ -1,0 +1,120 @@
+/* Robot selection cards and styling */
+.robot-selection {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 0 auto 30px auto;
+    max-width: 900px;
+}
+
+.robot-card {
+    width: 200px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+    border: 4px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.robot-card.selected {
+    transform: scale(1.05);
+}
+
+/* Robot colors and appearance */
+.robot-color {
+    height: 120px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.robot-red { 
+    background-color: #ff4d4d; 
+    background-image: linear-gradient(135deg, #ff6666 25%, #ff3333 25%, #ff3333 50%, #ff6666 50%, #ff6666 75%, #ff3333 75%, #ff3333 100%);
+    background-size: 20px 20px;
+}
+
+.robot-blue { 
+    background-color: #4d94ff; 
+    background-image: linear-gradient(135deg, #66a3ff 25%, #3385ff 25%, #3385ff 50%, #66a3ff 50%, #66a3ff 75%, #3385ff 75%, #3385ff 100%);
+    background-size: 20px 20px;
+}
+
+.robot-yellow { 
+    background-color: #ffcc00; 
+    background-image: linear-gradient(135deg, #ffd633 25%, #ffcc00 25%, #ffcc00 50%, #ffd633 50%, #ffd633 75%, #ffcc00 75%, #ffcc00 100%);
+    background-size: 20px 20px;
+}
+
+.robot-green { 
+    background-color: #4dff4d; 
+    background-image: linear-gradient(135deg, #66ff66 25%, #33ff33 25%, #33ff33 50%, #66ff66 50%, #66ff66 75%, #33ff33 75%, #33ff33 100%);
+    background-size: 20px 20px;
+}
+
+/* Robot figure elements */
+.robot-figure {
+    width: 60px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    position: relative;
+}
+
+.robot-eyes {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.robot-eye {
+    width: 12px;
+    height: 12px;
+    background-color: #0066cc;
+    border-radius: 50%;
+}
+
+.robot-mouth {
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 4px;
+    background-color: #333;
+}
+
+.robot-body {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.robot-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 10px 0 5px;
+}
+
+.robot-power {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.robot-power-desc {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #666;
+}
