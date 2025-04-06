@@ -1,0 +1,32 @@
+/* Item pulse animation */
+@keyframes pulseItem {
+    0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 204, 0, 0.6); }
+    100% { transform: scale(1.1); box-shadow: 0 0 25px rgba(255, 204, 0, 0.8); }
+}
+
+/* Item collection animation */
+@keyframes collectItem {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+/* Star rotation animation */
+@keyframes rotateStar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Collection effect animation */
+@keyframes collectEffect {
+    0% { 
+        transform: scale(0.2); 
+        opacity: 1;
+        border-width: 4px;
+    }
+    100% { 
+        transform: scale(2); 
+        opacity: 0;
+        border-width: 1px;
+    }
+}

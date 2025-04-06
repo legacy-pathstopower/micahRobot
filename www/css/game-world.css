@@ -1,0 +1,144 @@
+/* Game world container */
+.game-world {
+    width: 100%;
+    height: 1800px;
+    background-color: #e6e6e6;
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 50px,
+        rgba(0, 0, 0, 0.02) 50px,
+        rgba(0, 0, 0, 0.02) 100px
+    ),
+    repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 50px,
+        rgba(0, 0, 0, 0.02) 50px,
+        rgba(0, 0, 0, 0.02) 100px
+    );
+    border: 3px solid #999;
+    border-radius: 12px;
+    position: relative;
+    overflow: auto; /* Allow scrolling for large game world */
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+}
+
+/* Obstacles */
+.obstacle {
+    position: absolute;
+    background-color: #888;
+    background-image: linear-gradient(135deg, #999 25%, #777 25%, #777 50%, #999 50%, #999 75%, #777 75%, #777 100%);
+    background-size: 20px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Rescue items */
+.rescue-item {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffcc00;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
+    animation: pulseItem 2s infinite alternate;
+    z-index: 5;
+}
+
+.rescue-item.found {
+    background-color: #99ff99;
+    animation: collectItem 0.5s forwards;
+    box-shadow: 0 0 20px rgba(0, 204, 0, 0.8);
+}
+
+.star-icon {
+    color: #008800;
+    font-size: 24px;
+    text-shadow: 0 0 5px white;
+    display: none;
+}
+
+.rescue-item.found .star-icon {
+    display: block;
+    animation: rotateStar 1s forwards;
+}
+
+/* Player robot */
+.player-robot {
+    position: absolute;
+    width: 60px;
+    height: 80px;
+    border-radius: 10px;
+    left: 20px;
+    top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.player-robot.robot-red {
+    background-color: #ff4d4d; 
+    background-image: linear-gradient(135deg, #ff6666 25%, #ff3333 25%, #ff3333 50%, #ff6666 50%, #ff6666 75%, #ff3333 75%, #ff3333 100%);
+    background-size: 20px 20px;
+}
+
+.player-robot.robot-blue {
+    background-color: #4d94ff; 
+    background-image: linear-gradient(135deg, #66a3ff 25%, #3385ff 25%, #3385ff 50%, #66a3ff 50%, #66a3ff 75%, #3385ff 75%, #3385ff 100%);
+    background-size: 20px 20px;
+}
+
+.player-robot.robot-yellow {
+    background-color: #ffcc00; 
+    background-image: linear-gradient(135deg, #ffd633 25%, #ffcc00 25%, #ffcc00 50%, #ffd633 50%, #ffd633 75%, #ffcc00 75%, #ffcc00 100%);
+    background-size: 20px 20px;
+}
+
+.player-robot.robot-green {
+    background-color: #4dff4d; 
+    background-image: linear-gradient(135deg, #66ff66 25%, #33ff33 25%, #33ff33 50%, #66ff66 50%, #66ff66 75%, #33ff33 75%, #33ff33 100%);
+    background-size: 20px 20px;
+}
+
+.robot-face {
+    width: 40px;
+    height: 20px;
+    background-color: white;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+}
+
+.robot-face:before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    width: 8px;
+    height: 8px;
+    background-color: #0066cc;
+    border-radius: 50%;
+    box-shadow: 16px 0 0 #0066cc;
+}
+
+.robot-face:after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 4px;
+    background-color: black;
+    border-radius: 2px;
+}

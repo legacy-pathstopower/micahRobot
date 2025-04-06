@@ -1,0 +1,196 @@
+/* Enhanced Touch controls styles */
+
+/* Touch controls container */
+.touch-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 100;
+    pointer-events: none; /* Allow clicks to pass through the container */
+}
+
+/* Direction pad */
+.direction-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
+    gap: 5px;
+    pointer-events: auto; /* Re-enable pointer events for buttons */
+}
+
+.direction-pad button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px solid #0066cc;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+    transition: transform 0.1s, background-color 0.1s;
+}
+
+.direction-pad button:active {
+    transform: scale(0.9);
+    background-color: rgba(0, 102, 204, 0.2);
+}
+
+.up-btn { grid-column: 2; grid-row: 1; }
+.left-btn { grid-column: 1; grid-row: 2; }
+.right-btn { grid-column: 3; grid-row: 2; }
+.down-btn { grid-column: 2; grid-row: 3; }
+
+/* Power button for touch */
+.power-btn {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #cc0000;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    pointer-events: auto; /* Re-enable pointer events */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+    transition: transform 0.1s, opacity 0.1s;
+    margin-right: 20px;
+}
+
+/* Add different colors based on selected robot */
+.robot-red-control .power-btn {
+    background-color: rgba(255, 50, 50, 0.9);
+    box-shadow: 0 0 15px rgba(255, 50, 50, 0.7);
+}
+
+.robot-blue-control .power-btn {
+    background-color: rgba(50, 100, 255, 0.9);
+    border-color: #0044cc;
+    box-shadow: 0 0 15px rgba(50, 100, 255, 0.7);
+}
+
+.robot-yellow-control .power-btn {
+    background-color: rgba(255, 200, 0, 0.9);
+    border-color: #cc9900;
+    box-shadow: 0 0 15px rgba(255, 200, 0, 0.7);
+}
+
+.robot-green-control .power-btn {
+    background-color: rgba(0, 200, 0, 0.9);
+    border-color: #006600;
+    box-shadow: 0 0 15px rgba(0, 200, 0, 0.7);
+}
+
+.power-btn:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+.power-btn:disabled {
+    background-color: rgba(204, 204, 204, 0.8) !important;
+    border-color: #999999;
+    box-shadow: none;
+}
+
+/* Pause button */
+.pause-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px solid #0066cc;
+    color: #0066cc;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.pause-btn:active {
+    transform: scale(0.9);
+    background-color: rgba(0, 102, 204, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .direction-pad {
+        grid-template-columns: repeat(3, 50px);
+        grid-template-rows: repeat(3, 50px);
+    }
+    
+    .direction-pad button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .power-btn {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    .direction-pad {
+        grid-template-columns: repeat(3, 45px);
+        grid-template-rows: repeat(3, 45px);
+    }
+    
+    .direction-pad button {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+    
+    .power-btn {
+        width: 65px;
+        height: 65px;
+        font-size: 14px;
+    }
+}
+
+/* Media query for portrait mode on tablets and mobile devices */
+@media (orientation: portrait) {
+    .game-world {
+        height: 1200px; /* Reduce game world height for portrait orientation */
+    }
+    
+    .touch-controls {
+        bottom: 40px; /* Move controls a bit up from the bottom */
+    }
+}
+
+/* Toggle touch controls visibility */
+@media (pointer: coarse) {
+    .touch-controls {
+        display: flex;
+    }
+    
+    /* Show instructions for controls */
+    .controls-list li:nth-child(1) {
+        display: none; /* Hide keyboard instructions on touch devices */
+    }
+}
+
+@media (pointer: fine) {
+    .touch-controls {
+        display: none;
+    }
+    
+    .pause-btn {
+        display: none;
+    }
+}

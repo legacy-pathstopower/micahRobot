@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Robot Rescue Mission</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/touch-controls.css">
+    
+    <!-- Prevent pinch zoom on iOS devices -->
+    <script>
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Robot Selection Screen -->
+        <div id="selection-screen" class="game-screen">
+            <h1>Robot Rescue Mission</h1>
+            <h2>Choose your Robot, Micah!</h2>
+            
+            <div class="robot-selection">
+                <div class="robot-card" data-robot="red" onclick="selectRobot('red')">
+                    <div class="robot-color robot-red">
+                        <div class="robot-figure">
+                            <div class="robot-eyes">
+                                <div class="robot-eye"></div>
+                                <div class="robot-eye"></div>
+                            </div>
+                            <div class="robot-mouth"></div>
+                            <div class="robot-body"></div>
+                        </div>
+                    </div>
+                    <div class="robot-name">Blaze</div>
+                    <div class="robot-power">Power: Flight</div>
+                    <div class="robot-power-desc">Can fly over one obstacle</div>
+                </div>
+                
+                <div class="robot-card" data-robot="blue" onclick="selectRobot('blue')">
+                    <div class="robot-color robot-blue">
+                        <div class="robot-figure">
+                            <div class="robot-eyes">
+                                <div class="robot-eye"></div>
+                                <div class="robot-eye"></div>
+                            </div>
+                            <div class="robot-mouth"></div>
+                            <div class="robot-body"></div>
+                        </div>
+                    </div>
+                    <div class="robot-name">Sonar</div>
+                    <div class="robot-power">Power: Scan</div>
+                    <div class="robot-power-desc">Can detect a hidden item</div>
+                </div>
+                
+                <div class="robot-card" data-robot="yellow" onclick="selectRobot('yellow')">
+                    <div class="robot-color robot-yellow">
+                        <div class="robot-figure">
+                            <div class="robot-eyes">
+                                <div class="robot-eye"></div>
+                                <div class="robot-eye"></div>
+                            </div>
+                            <div class="robot-mouth"></div>
+                            <div class="robot-body"></div>
+                        </div>
+                    </div>
+                    <div class="robot-name">Bumble</div>
+                    <div class="robot-power">Power: Shrink</div>
+                    <div class="robot-power-desc">Can shrink to reach tight spaces</div>
+                </div>
+                
+                <div class="robot-card" data-robot="green" onclick="selectRobot('green')">
+                    <div class="robot-color robot-green">
+                        <div class="robot-figure">
+                            <div class="robot-eyes">
+                                <div class="robot-eye"></div>
+                                <div class="robot-eye"></div>
+                            </div>
+                            <div class="robot-mouth"></div>
+                            <div class="robot-body"></div>
+                        </div>
+                    </div>
+                    <div class="robot-name">Crusher</div>
+                    <div class="robot-power">Power: Strength</div>
+                    <div class="robot-power-desc">Can move one heavy obstacle</div>
+                </div>
+            </div>
+            
+            <div class="game-settings">
+                <div class="settings-row">
+                    <label for="difficulty">Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div class="settings-row">
+                    <label for="game-time">Time Limit:</label>
+                    <select id="game-time">
+                        <option value="60">60 seconds</option>
+                        <option value="90" selected>90 seconds</option>
+                        <option value="120">120 seconds</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button id="start-button" class="start-button" disabled onclick="startGame()">
+                Start Rescue Mission!
+            </button>
+        </div>
+        
+        <!-- Gameplay Screen -->
+        <div id="gameplay-screen" class="game-screen">
+            <div class="game-header">
+                <div class="info-box robot-info">
+                    Robot: <span id="robot-name">-</span>
+                </div>
+                <div class="info-box timer-info">
+                    Time: <span id="timer">60</span>s
+                </div>
+                <div class="info-box score-info">
+                    Score: <span id="score">0</span>/<span id="total-items">0</span>
+                </div>
+                <div class="mini-map-container">
+                    <div id="mini-map" class="mini-map"></div>
+                </div>
+            </div>
+            
+            <div class="game-world" id="game-world">
+                <!-- Obstacles will be generated by JavaScript -->
+                
+                <!-- Items will be generated by JavaScript -->
+                
+                <!-- Player Robot -->
+                <div class="player-robot" id="player-robot">
+                    <div class="robot-face"></div>
+                </div>
+            </div>
+            
+            <button id="power-button" class="power-button" onclick="usePower()">
+                Use Power!
+            </button>
+            
+            <div class="instructions">
+                <p>Find all the items before time runs out!</p>
+                <ul class="controls-list">
+                    <li><strong>Movement:</strong> W, A, S, D or Arrow keys</li>
+                    <li><strong>Use Power:</strong> Spacebar or click power button</li>
+                    <li><strong>Pause Game:</strong> P or ESC key</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Game Complete Screen -->
+        <div id="complete-screen" class="game-screen">
+            <h1>Mission Complete!</h1>
+            
+            <div class="complete-message">
+                <h2 class="complete-title">Great job, Micah!</h2>
+                <p class="complete-score">You rescued <span id="final-score">0</span> out of <span id="final-total">0</span> items!</p>
+                
+                <div id="perfect-score-message" class="perfect-score" style="display: none;">
+                    Perfect Score! You're a Rescue Hero!
+                </div>
+                
+                <div id="try-again-message" class="try-again">
+                    Try again to rescue all the items!
+                </div>
+            </div>
+            
+            <button class="start-button" onclick="resetGame()">
+                Play Again
+            </button>
+        </div>
+    </div>
+
+    <!-- Link to JavaScript files -->
+    <script src="js/config.js"></script>
+    <script src="js/controls.js"></script>
+    <script src="js/generation.js"></script>
+    <script src="js/game-core.js"></script>
+    <script src="js/touch-controls.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

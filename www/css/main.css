@@ -1,0 +1,22 @@
+/* Import all modular CSS files */
+@import 'base.css';
+@import 'robot-selection.css';
+@import 'game-screens.css';
+@import 'game-world.css';
+@import 'game-ui.css';
+@import 'animations.css';
+
+/* Very basic styles that don't fit elsewhere */
+body {
+    font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+    background-color: #e6f7ff;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.game-container {
+    max-width: 1800px;
+    width: 100%;
+}
