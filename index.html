@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Robot Rescue Mission</title>
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/touch-controls.css">
+    
+    <!-- Prevent pinch zoom on iOS devices -->
+    <script>
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
+    </script>
 </head>
 <body>
     <div class="game-container">
@@ -173,6 +183,7 @@
     <script src="js/controls.js"></script>
     <script src="js/generation.js"></script>
     <script src="js/game-core.js"></script>
+    <script src="js/touch-controls.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

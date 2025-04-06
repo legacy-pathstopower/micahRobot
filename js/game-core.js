@@ -108,6 +108,23 @@ function startGame() {
     if (gameConfig.selectedRobot === 'green') powerButton.style.backgroundColor = '#4dff4d';
     powerButton.disabled = false;
     
+    // Update touch controls styling based on selected robot
+    if (isTouchDevice()) {
+        const touchControls = document.querySelector('.touch-controls');
+        if (touchControls) {
+            // Remove any previous robot class
+            touchControls.classList.remove('robot-red-control', 'robot-blue-control', 'robot-yellow-control', 'robot-green-control');
+            // Add appropriate class based on selected robot
+            touchControls.classList.add(`robot-${gameConfig.selectedRobot}-control`);
+            
+            // Update power button text for touch
+            const powerBtn = document.querySelector('.power-btn');
+            if (powerBtn) {
+                powerBtn.textContent = gameConfig.robots[gameConfig.selectedRobot].power;
+            }
+        }
+    }
+    
     // Initialize mini-map
     updateMiniMap();
     
@@ -199,8 +216,16 @@ function usePower() {
     if (gameConfig.powerUsed) return;
     
     gameConfig.powerUsed = true;
+    
+    // Disable standard power button
     document.getElementById('power-button').disabled = true;
     document.getElementById('power-button').style.backgroundColor = '#cccccc';
+    
+    // Disable touch power button if it exists
+    const touchPowerBtn = document.querySelector('.power-btn');
+    if (touchPowerBtn) {
+        touchPowerBtn.disabled = true;
+    }
     
     // Special power effect based on robot
     if (gameConfig.selectedRobot === 'red') {
@@ -341,6 +366,49 @@ function resetGame() {
     document.getElementById('start-button').disabled = true;
 }
 
+// Modify togglePause to handle the touch pause button appearance
+function togglePause() {
+    gameConfig.gamePaused = !gameConfig.gamePaused;
+    
+    if (gameConfig.gamePaused) {
+        // Pause the game
+        clearInterval(gameConfig.timerInterval);
+        
+        // Show pause message
+        const pauseMessage = document.createElement('div');
+        pauseMessage.id = 'pause-message';
+        pauseMessage.innerHTML = '<h2>GAME PAUSED</h2><p>Press P or ESC to resume</p>';
+        
+        // Add touch instruction if touch device
+        if (isTouchDevice()) {
+            pauseMessage.innerHTML += '<p>Or tap the pause button again</p>';
+        }
+        
+        document.getElementById('gameplay-screen').appendChild(pauseMessage);
+        
+        // Update pause button appearance if it exists
+        const pauseBtn = document.querySelector('.pause-btn');
+        if (pauseBtn) {
+            pauseBtn.innerHTML = '&#9658;'; // Play symbol
+            pauseBtn.style.backgroundColor = 'rgba(0, 204, 102, 0.8)';
+        }
+    } else {
+        // Remove pause message
+        const pauseMessage = document.getElementById('pause-message');
+        if (pauseMessage) pauseMessage.remove();
+        
+        // Resume timer
+        startTimer();
+        
+        // Update pause button appearance if it exists
+        const pauseBtn = document.querySelector('.pause-btn');
+        if (pauseBtn) {
+            pauseBtn.innerHTML = 'II'; // Pause symbol
+            pauseBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        }
+    }
+}
+
 // Export functions to global scope
 window.selectRobot = selectRobot;
 window.startGame = startGame;
@@ -349,3 +417,4 @@ window.findItem = findItem;
 window.usePower = usePower;
 window.endGame = endGame;
 window.resetGame = resetGame;
+window.togglePause = togglePause;
